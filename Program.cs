@@ -74,7 +74,7 @@ Console.WriteLine("Gib eine Zahl ein:");
 int userZahl= Convert.ToInt32(Console.ReadLine());
 Console.WriteLine(userZahl % 2 ==0? "Gerade": "Ungerade");
 
-using System.ComponentModel.DataAnnotations;
+
 
 Console.WriteLine("Gib eine Zahl ein:");
 int userZahl= Convert.ToInt32(Console.ReadLine());
@@ -82,13 +82,75 @@ Console.WriteLine("Gib noch eine Zahl ein");
 int userZahl2= Convert.ToInt32(Console.ReadLine());
 int maxZahl= Math.Max(userZahl, userZahl2);
 Console.WriteLine(maxZahl);
+
+//Aufgaben 3
+
+int i;
+string liste1="";
+
+for(i=1;i <=20; i++)
+{
+    liste1+=i + ",";
+    
+}
+Console.WriteLine(liste1);
+
+
+int i2;
+string liste2="";
+
+for (i2=1; i2<=50; i2++)
+{
+    if (i2 % 2 ==0)
+    {
+        liste2+=i2 + ",";
+    }
+}
+Console.WriteLine(liste2);
+
+//das gleiche wie oben aber anders
+string liste5="";
+for (int i=2; i<=50;i+=2)
+{
+    liste5+=i + ",";
+}
+Console.WriteLine(liste5);
+
+
+
+int sume=0;
+
+for (int i=1; i <= 100; i++)
+{
+    sume+=i;
+    
+}
+Console.WriteLine(sume);
+
+
+Console.WriteLine("Gib eine Zahl ein:");
+int userZahl= Convert.ToInt32(Console.ReadLine());  
+for (int i=1; i <=userZahl; i++)
+{
+    Console.WriteLine(i);
+}
+
+Console.Write("Gib eine Zahl ein: ");
+
+int zahl =7;
+
+int i = 1;
+
+while (i <= 10)
+{
+    Console.WriteLine($"{zahl} x {i} = {zahl * i}");
+    i++;
+}
+
+for (int i=10; i >=1; i--)
+{
+    Console.WriteLine(i);
+    
+}
 */
-
-
-
-
-
-
-
-
 
