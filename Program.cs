@@ -153,4 +153,44 @@ for (int i=10; i >=1; i--)
     
 }
 */
+//Aufgabe 4
+//4.1
 
+string SagHallo()
+{
+    return "Hallo!";
+}
+Console.WriteLine(SagHallo());
+//4.2
+int Addiere(int a, int b)
+{
+    return a + b;
+}
+Console.WriteLine(Addiere(2, 15));
+//4.3
+string IstGerade(int zahl)
+{
+    return zahl % 2 == 0 ? "Gerade" : "Ungerade";
+}
+Console.WriteLine(IstGerade(22));
+//4.4
+int Quadrat(int zahl)
+{
+    return zahl * zahl;
+}
+Console.WriteLine(Quadrat(5));
+//4.5
+int Max(int a , int b)
+{
+    return Math.Max(a, b);
+}   
+Console.WriteLine(Max(10, 20));
+//4.6
+int NoteBerechen (int punkte)
+{
+    if (punkte >= 92) return 1;
+    else if (punkte >= 80) return 2;
+    else if (punkte >= 67) return 3;
+    else if (punkte >= 50) return 4;
+    else return 5;
+}
