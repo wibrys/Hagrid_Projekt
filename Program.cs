@@ -388,7 +388,7 @@ foreach (var student in studentliste.Where(student=>student.alter<20))
 studentliste.Count();
 Console.WriteLine($"Anzahl der Studenten ist: {studentliste.Count()}");
 
-//9.6 Liste nur mit Namen (Warum wird automatisch alpabetisch sortiert? Wie kann ich das andern?)
+//9.6 Liste nur mit Namen  (Warum wird automatisch alpabetisch sortiert? Wie kann ich das andern??)
 studentliste.ForEach(student=>Console.WriteLine(student.name));
 
 //Aufgabe 10
@@ -403,7 +403,7 @@ studentliste.ForEach(student=>Console.WriteLine(student.name));
 //Klasse Kurs erstellen, Zwei Objekte von Kurs erstellen, Studenten hinzufügen und anzeigen. Max Teilnehmer prüfen.
 
 Kurs kurs1= new Kurs("Hagrids Armee", 5);
-Kurs kurs2= new Kurs("HausSlytherin", 6);
+Kurs kurs2= new Kurs("Haus Slytherin", 6);
 
 Console.WriteLine(kurs1.Info()+"\n"+kurs2.Info());
 
@@ -438,4 +438,39 @@ foreach (var teilnehmer in kurs1.teilnehmerListe)
     }
 }
 
+// Aufgabe 12 Statistik ( Unterschied zwischen LINQ, Filtern, und Statistik merken )
+
+//Anzahl Studenten
+int anzahlStudenten=studentliste.Count();
+Console.WriteLine(anzahlStudenten);
+int anzahlStudentenInKurs=kurs1.teilnehmerListe.Count();
+Console.WriteLine(anzahlStudentenInKurs);
+
+//Durschnittalter
+double durschnittAltStudent=studentliste.Average(student => student.alter);
+Console.WriteLine(durschnittAltStudent);
+double durschnittAltStudentInKurs=kurs1.teilnehmerListe.Average(student => student.alter);
+Console.WriteLine(durschnittAltStudentInKurs);
+
+//Ältsete Student
+int altesteStudent=studentliste.Max(student => student.alter);
+Console.WriteLine(altesteStudent);
+int altesteKursTeilnehmer=kurs1.teilnehmerListe.Max(student => student.alter);
+Console.WriteLine(altesteKursTeilnehmer);
+
+//Jüngste Student
+int jungsteStudent=studentliste.Min(student=> student.alter);
+Console.WriteLine(jungsteStudent);
+int jungsteKursTeilnehmer=kurs2.teilnehmerListe.Min(student=> student.alter);
+Console.WriteLine(jungsteKursTeilnehmer);
+
+//Sortieren Liste
+var kursTeihlenmerRanking= kurs2.teilnehmerListe.OrderByDescending(student => student.alter);
+Console.WriteLine($"Ranking der Teilnehmer in {kurs2.Info()} nach Alter:");
+
+//Nur name zeigen 
+kurs1.teilnehmerListe.ForEach(student=>Console.WriteLine(student.name));
+
+
+//Aufgabe 13 MENU
 
