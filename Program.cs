@@ -222,9 +222,9 @@ List<Auto> autoListe = new List<Auto>()
 {
   new Auto() { Marke = "BMW v7", Baujahr = 2025 },
   new Auto() { Marke = "Audi a4", Baujahr = 2024 },
-  new Auto() { Marke = "VW Golf 5", Baujahr = 2023 },   
+  new Auto() { Marke = "VW Golf 5", Baujahr = 2025 },   
   new Auto() { Marke = "Ford Fiesta", Baujahr = 2022 },
-  new Auto() { Marke = "Fiat Punto", Baujahr = 2021 }    
+  new Auto() { Marke = "Fiat Punto", Baujahr = 2025 }    
 };
 
 Console.WriteLine("Autos in der Liste:");
@@ -234,3 +234,56 @@ foreach (var auto in autoListe)
 }
 
 
+//6.3
+Auto auto3= new Auto("Toyota Yaris", 2020);
+Auto auto4= new Auto("Opel Fiesta", 2018);
+Auto auto5= new Auto("VW Polo", 1999);
+
+
+//6.4
+List<Auto> autoListe2 = new List<Auto>()
+{
+    auto3,
+    auto4,
+    auto5
+};
+foreach (var auto in autoListe2)
+{
+    Console.WriteLine(auto);
+}
+
+//6.6
+foreach (var auto in autoListe2)
+{
+    auto.Info();
+}
+
+//7.3 
+
+using Microsoft.VisualBasic;
+
+List<Student> studentliste=new List<Student>()
+{
+    
+};
+
+//7.4
+studentliste.Add(new Student { name = "Agnieszka", alter = 38 });
+studentliste.Add(new Student { name = "John", alter = 25 });
+studentliste.Add(new Student { name = "Maria", alter = 30 });
+studentliste.Add(new Student { name = "Peter", alter = 22 });
+studentliste.Add(new Student { name = "Anna", alter = 28 });
+
+//7.5
+foreach (var student in studentliste)
+{
+    Console.WriteLine($"Name: {student.name}, Alter: {student.alter}");
+}
+
+//7.6
+int anzahlStudent=0;
+foreach (var student in studentliste)
+{
+    anzahlStudent++;
+}
+Console.WriteLine($"Anzahl der Studenten: {anzahlStudent}");
