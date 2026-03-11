@@ -257,9 +257,11 @@ foreach (var auto in autoListe2)
 {
     auto.Info();
 }
-
+//Studenten Liste erstellen, Studenten hinzufügen anzeigen filtern
 //7.3 
 
+using System.ComponentModel.DataAnnotations;
+using System.Net.Mail;
 using Microsoft.VisualBasic;
 
 List<Student> studentliste=new List<Student>()
@@ -267,12 +269,13 @@ List<Student> studentliste=new List<Student>()
     
 };
 
+
 //7.4
 studentliste.Add(new Student { name = "Agnieszka", alter = 38 });
-studentliste.Add(new Student { name = "John", alter = 25 });
-studentliste.Add(new Student { name = "Maria", alter = 30 });
-studentliste.Add(new Student { name = "Peter", alter = 22 });
-studentliste.Add(new Student { name = "Anna", alter = 28 });
+studentliste.Add(new Student { name = "Lukas", alter = 25 });
+studentliste.Add(new Student { name = "Uwe", alter = 30 });
+studentliste.Add(new Student { name = "Beata", alter = 42 });
+studentliste.Add(new Student { name = "Anna", alter = 19 });
 
 //7.5
 foreach (var student in studentliste)
@@ -287,3 +290,152 @@ foreach (var student in studentliste)
     anzahlStudent++;
 }
 Console.WriteLine($"Anzahl der Studenten: {anzahlStudent}");
+
+//8.1
+foreach (var student in studentliste)
+{
+    if (student.alter > 20)
+    {
+        Console.WriteLine($"Name: {student.name}, Alter: {student.alter}");
+    }
+}
+//8.2
+foreach (var student in studentliste)
+{
+    if (student.alter<18)
+    {
+        Console.WriteLine($"Name: {student.name}, Alter: {student.alter}");
+    }
+}
+//8.3 
+int anzahlStudentUber25=0;
+foreach (var student in studentliste)
+{
+    if(student.alter>25)
+    {
+       anzahlStudentUber25++; 
+    }
+}
+Console.WriteLine($"Anzahl der Studenten über 25 Jahre: {anzahlStudentUber25}");
+//8.4
+studentliste.Sort((a,b) => a.alter.CompareTo(b.alter));
+studentliste.ForEach(student=> Console.WriteLine(student.alter + " " +student.name));
+//8.5
+studentliste.Sort((a,b) => string.Compare(a.name, b.name));
+studentliste.ForEach(student=>Console.WriteLine(student.name));
+//8.6
+studentliste.OrderByDescending(student => student.alter);
+var alteste=studentliste.OrderByDescending(student => student.alter).First();
+Console.WriteLine($"Älteste Student ist {alteste.name}");
+//noch kurzer geschrieben mit 'MaxBy' funktion 
+var alteste2=studentliste.MaxBy(student => student.alter);
+Console.WriteLine($"Älteste Student ist {alteste2.name}");
+
+//Aufgabe 9 LINQ Häufigste Befehle
+/*
+Where	Filters elements	                    list.Where(x => x > 10)
+Select	Projects each element	                list.Select(x => x * 2)
+SelectMany	Flattens collections	            list.SelectMany(x => x.Children)
+OrderBy	Sort ascending	                        list.OrderBy(x => x.Name)
+OrderByDescending	Sort descending	            list.OrderByDescending(x => x.Age)
+ThenBy	Secondary sort ascending	            list.OrderBy(x => x.Name).ThenBy(x => x.Age)
+ThenByDescending	Secondary sort descending	list.OrderBy(x => x.Name).ThenByDescending(x => x.Age)
+GroupBy	Groups elements	                        list.GroupBy(x => x.Category)
+Join	Inner join	                            list1.Join(list2, a => a.Id, b => b.Id, (a, b) => new { a, b }) 
+GroupJoin	Group join	                        list1.GroupJoin(list2, a => a.Id, b => b.Id, (a, bs) => new { a, bs })
+Distinct	Removes duplicates	                list.Distinct()
+Union	Combines without duplicates	            list1.Union(list2)
+Intersect	Common elements	list1.Intersect     (list2)
+Except	Elements in first but not second	    list1.Except(list2)
+Any	Checks if any match	                        list.Any(x => x > 10)
+All	Checks if all match	                        list.All(x => x > 0)
+Count	Counts elements	                        list.Count()
+Sum	Sums values	                                list.Sum(x => x.Price)
+Average	Average value	                        list.Average(x => x.Price)
+Min / Max	Min/Max value	                    list.Min(x => x.Price)
+First	First element	                        list.First()
+FirstOrDefault	First or default	            list.FirstOrDefault()
+Single	Exactly one element	                    list.Single(x => x.Id == 1)
+SingleOrDefault	One or default	                list.SingleOrDefault(x => x.Id == 1)
+Take	First N elements	                    list.Take(5)
+Skip	Skip first N elements	                list.Skip(5)
+Reverse	Reverse order	                        list.Reverse()
+*/
+
+
+
+//9.1 Durschnitalter
+studentliste.Average(student => student.alter);
+Console.WriteLine($"Durschnitalter der Studenten ist: {studentliste.Average(student => student.alter)}");
+
+//9.2 älteste Student
+studentliste.Max(student => student.alter);
+Console.WriteLine($"Älteste Student ist {studentliste.Max(student => student.alter)} Jahre alt.");
+
+//9.3 sortieren Studenten nach Name
+studentliste.OrderBy(student => student.name);
+foreach (var student in studentliste)
+{
+    Console.WriteLine(student.name);
+}
+//9.4 Studenten unter 20 
+studentliste.Where(student=>student.alter<20);
+foreach (var student in studentliste.Where(student=>student.alter<20))
+{
+    Console.WriteLine(student.name + " " + student.alter);
+}
+//9.5 StudentenCount
+studentliste.Count();
+Console.WriteLine($"Anzahl der Studenten ist: {studentliste.Count()}");
+
+//9.6 Liste nur mit Namen (Warum wird automatisch alpabetisch sortiert? Wie kann ich das andern?)
+studentliste.ForEach(student=>Console.WriteLine(student.name));
+
+//Aufgabe 10
+//10.1
+//10.2
+//10.3
+//10.4
+//10.5
+//10.6
+
+//Aufgabe 11
+//Klasse Kurs erstellen, Zwei Objekte von Kurs erstellen, Studenten hinzufügen und anzeigen. Max Teilnehmer prüfen.
+
+Kurs kurs1= new Kurs("Hagrids Armee", 5);
+Kurs kurs2= new Kurs("HausSlytherin", 6);
+
+Console.WriteLine(kurs1.Info()+"\n"+kurs2.Info());
+
+kurs1.teilnehmerListe.Add(studentliste[0]);
+kurs1.teilnehmerListe.Add(studentliste[1]);
+kurs2.teilnehmerListe.Add(studentliste[3]);
+kurs2.teilnehmerListe.Add(studentliste[2]);
+
+Console.WriteLine($"Teilnehmer von {kurs1.Info()} sind: ");
+foreach (var teilnehmer in kurs1.teilnehmerListe)
+{
+    Console.WriteLine(teilnehmer.name);
+}
+
+Console.WriteLine($"Teilnehmer von {kurs2.Info()} sind: ");
+foreach(var teilnehmer in kurs2.teilnehmerListe)
+{
+    Console.WriteLine(teilnehmer.name);
+}
+ 
+foreach (var teilnehmer in kurs1.teilnehmerListe)
+{
+    if (kurs1.teilnehmerListe.Count > kurs1.maXTeilnehmer)
+    {
+        Console.WriteLine($"Der Kurs {kurs1.Info()} hat die maximale Teilnehmerzahl überschritten.");
+        break;
+    }
+    else
+    {
+        Console.WriteLine($"Der Kurs {kurs1.Info()} hat noch Platz für weitere Teilnehmer.");
+        break;
+    }
+}
+
+
