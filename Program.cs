@@ -260,6 +260,8 @@ foreach (var auto in autoListe2)
 //Studenten Liste erstellen, Studenten hinzufügen anzeigen filtern
 //7.3 
 
+
+using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
 using Microsoft.VisualBasic;
@@ -332,37 +334,6 @@ var alteste2=studentliste.MaxBy(student => student.alter);
 Console.WriteLine($"Älteste Student ist {alteste2.name}");
 
 //Aufgabe 9 LINQ Häufigste Befehle
-/*
-Where	Filters elements	                    list.Where(x => x > 10)
-Select	Projects each element	                list.Select(x => x * 2)
-SelectMany	Flattens collections	            list.SelectMany(x => x.Children)
-OrderBy	Sort ascending	                        list.OrderBy(x => x.Name)
-OrderByDescending	Sort descending	            list.OrderByDescending(x => x.Age)
-ThenBy	Secondary sort ascending	            list.OrderBy(x => x.Name).ThenBy(x => x.Age)
-ThenByDescending	Secondary sort descending	list.OrderBy(x => x.Name).ThenByDescending(x => x.Age)
-GroupBy	Groups elements	                        list.GroupBy(x => x.Category)
-Join	Inner join	                            list1.Join(list2, a => a.Id, b => b.Id, (a, b) => new { a, b }) 
-GroupJoin	Group join	                        list1.GroupJoin(list2, a => a.Id, b => b.Id, (a, bs) => new { a, bs })
-Distinct	Removes duplicates	                list.Distinct()
-Union	Combines without duplicates	            list1.Union(list2)
-Intersect	Common elements	list1.Intersect     (list2)
-Except	Elements in first but not second	    list1.Except(list2)
-Any	Checks if any match	                        list.Any(x => x > 10)
-All	Checks if all match	                        list.All(x => x > 0)
-Count	Counts elements	                        list.Count()
-Sum	Sums values	                                list.Sum(x => x.Price)
-Average	Average value	                        list.Average(x => x.Price)
-Min / Max	Min/Max value	                    list.Min(x => x.Price)
-First	First element	                        list.First()
-FirstOrDefault	First or default	            list.FirstOrDefault()
-Single	Exactly one element	                    list.Single(x => x.Id == 1)
-SingleOrDefault	One or default	                list.SingleOrDefault(x => x.Id == 1)
-Take	First N elements	                    list.Take(5)
-Skip	Skip first N elements	                list.Skip(5)
-Reverse	Reverse order	                        list.Reverse()
-*/
-
-
 
 //9.1 Durschnitalter
 studentliste.Average(student => student.alter);
@@ -473,4 +444,50 @@ kurs1.teilnehmerListe.ForEach(student=>Console.WriteLine(student.name));
 
 
 //Aufgabe 13 MENU
+
+List<Student> studentslist2= new List<Student>();
+
+
+while(true)
+{
+   Console.WriteLine("Das ist auswahl MENU und du hast folgende Optionen zuverfügung:");
+   Console.WriteLine("1 Neue Student hinzufügen");
+   Console.WriteLine("2 Studen anzeigen");
+   Console.WriteLine("3 Statistik schauen");
+   Console.WriteLine("4 Beenden");
+
+   string userOption=Console.ReadLine();
+
+   switch(userOption)
+    {
+        case "1":
+            Console.WriteLine("Gib Name von Student");
+            string nameOfStudent = Console.ReadLine();
+            Console.WriteLine("Gib alter");
+            int alterOfStudent= Convert.ToInt32(Console.ReadLine()); 
+            studentslist2.Add(new Student{name=nameOfStudent, alter=alterOfStudent });
+        break;
+
+        case "2":
+            foreach(var student in studentslist2)
+            {
+                Console.WriteLine(student.name + " ,"+ student.alter);
+            }
+            break;
+        case "3":
+            Console.WriteLine("Da kommt später etwas...");
+            break;
+
+        case "4":
+            Console.WriteLine("Tschüss");
+            break;
+
+        default:
+            Console.WriteLine("Falsche eingabe");
+            break;
+    }
+}
+
+
+
 
