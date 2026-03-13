@@ -3,6 +3,7 @@
 //Aufgaben 1
 //1.1
 
+/*
 string name = "Agnieszka";
 int alter= 38;
 string stadt ="Lippstadt";
@@ -447,16 +448,19 @@ kurs1.teilnehmerListe.ForEach(student=>Console.WriteLine(student.name));
 
 List<Student> studentslist2= new List<Student>();
 
+Console.WriteLine("Das ist auswahl MENU und du hast folgende Optionen zuverfügung:");
+Console.WriteLine("1 Neue Student hinzufügen");
+Console.WriteLine("2 Studen anzeigen");
+Console.WriteLine("3 Statistik schauen");
+Console.WriteLine("4 Beenden");
 
-while(true)
+
+bool lauft = true;
+
+while(lauft)
 {
-   Console.WriteLine("Das ist auswahl MENU und du hast folgende Optionen zuverfügung:");
-   Console.WriteLine("1 Neue Student hinzufügen");
-   Console.WriteLine("2 Studen anzeigen");
-   Console.WriteLine("3 Statistik schauen");
-   Console.WriteLine("4 Beenden");
-
-   string userOption=Console.ReadLine();
+   Console.WriteLine("Nimm ein Option");
+   string userOption = Console.ReadLine();
 
    switch(userOption)
     {
@@ -466,28 +470,252 @@ while(true)
             Console.WriteLine("Gib alter");
             int alterOfStudent= Convert.ToInt32(Console.ReadLine()); 
             studentslist2.Add(new Student{name=nameOfStudent, alter=alterOfStudent });
-        break;
+            Console.WriteLine($"Student {nameOfStudent} wurde hinzugefügt");
+            break;
+
 
         case "2":
-            foreach(var student in studentslist2)
+            Console.WriteLine("Student anzeigen");
+
+            if (studentslist2.Count == 0)
             {
-                Console.WriteLine(student.name + " ,"+ student.alter);
+                Console.WriteLine("0 Studenten an der Liste.");
+            }
+            else
+            {
+                Console.WriteLine("Liste alle Studentetn");
+                foreach(var student in studentslist2)
+                {
+                    Console.WriteLine(student.name + " ,"+ student.alter);
+                }
             }
             break;
+
         case "3":
-            Console.WriteLine("Da kommt später etwas...");
+           
+            if (studentslist2.Count == 0)
+            {
+                Console.WriteLine("0 Studenten an der Liste.");
+            }
+            else
+            {
+                var jungsteStudent = studentslist2.Min(student => student.alter);
+                foreach (var student in studentslist2.Where(student => student.alter == jungsteStudent))
+                {
+                    Console.WriteLine($"Jüngste Student ist : {student.name}, {jungsteStudent} Jahre");
+                }
+
+                var altesteStudent = studentslist2.Max(student => student.alter);
+                foreach (var student in studentslist2.Where(student => student.alter == altesteStudent))
+                {
+                    Console.WriteLine($"Älteste Student ist : {student.name}, {altesteStudent} Jahre");
+                }
+               
+            }
             break;
 
         case "4":
             Console.WriteLine("Tschüss");
-            break;
+            return;
 
         default:
             Console.WriteLine("Falsche eingabe");
             break;
     }
 }
+ */
+
+ /*
+
+  Kurs CSharpAnfaenger = new Kurs("C# Anfänger", 7);
+
+        bool laeuft = true;
+
+        while (laeuft)
+        {
+            Console.WriteLine("\n1. Neue Student hinzufügen");
+            Console.WriteLine("2. Studenten anzeigen");
+            Console.WriteLine("3. Statistik anzeigen");
+            Console.WriteLine("4. Beenden");
+            Console.WriteLine("5. Status ändern");
+            Console.WriteLine("6. Status anzeigen");
+
+            Console.Write("Wähle eine Option: ");
+            int auswahl = Convert.ToInt32(Console.ReadLine());
+
+            MenuOptionen option = auswahl switch
+            {
+                1 => MenuOptionen.StudentHinzufuegen,
+                2 => MenuOptionen.TeilnehmerAnzeigen,
+                3 => MenuOptionen.StatistikAnzeigen,
+                4 => MenuOptionen.Beenden,
+                5 => MenuOptionen.StatusAndern,
+                6 => MenuOptionen.StatusAnzeigen,
+                _ => throw new Exception("Ungültige Option")
+            };
 
 
+   switch(option)
+    {
+        case MenuOptionen.StudentHinzufuegen:
+            if(CSharpAnfaenger.Status == KursStatus.Abgeschlossen)
+            {
+                Console.WriteLine("Der Kurs ist abgeschlossen. Kein weiterer Student kann hinzugefügt werden.");
+                break;
+            }
+            if(CSharpAnfaenger.Status == KursStatus.Aktiv)
+            {
+                Console.WriteLine("Der Kurs ist bereits begonenn. Frag Organisator ob du dich noch anmelden kannst. ");
+                break;
+            }
+        
+            Console.WriteLine("Gib Name von Student");
+            string nameOfStudent = Console.ReadLine();
+            Console.WriteLine("Gib alter von Student");
+            int alterOfStudent= Convert.ToInt32(Console.ReadLine()); 
+            
+            CSharpAnfaenger.Teilnehmer.Add(new Student{name=nameOfStudent, alter=alterOfStudent, Status=KursStatus.Anmelden_möglich });
+            Console.WriteLine($"Student {nameOfStudent} wurde hinzugefügt");
+            break;
+
+        case MenuOptionen.TeilnehmerAnzeigen:
+            Console.WriteLine("Student anzeigen");
+
+            if (CSharpAnfaenger.Teilnehmer.Count == 0)
+            {
+                Console.WriteLine("0 Studenten an der Liste.");
+            }
+            else
+            {
+                Console.WriteLine("Liste alle Studentetn");
+                foreach(var student in CSharpAnfaenger.Teilnehmer)
+                {
+                Console.WriteLine(student.name + " ,"+ student.alter + "," + student.Status);
+                }
+            }
+            break;
+
+        case MenuOptionen.StatistikAnzeigen:
+            if (CSharpAnfaenger.Teilnehmer.Count == 0)
+            {
+                Console.WriteLine("0 Studenten an der Liste.");
+            }
+            else
+            {
+                var jungsteStudent = CSharpAnfaenger.Teilnehmer.Min(student => student.alter);
+                foreach (var student in CSharpAnfaenger.Teilnehmer.Where(student => student.alter == jungsteStudent))
+                {
+                    Console.WriteLine($"Jüngste Student ist : {student.name}, {jungsteStudent} Jahre");
+                }
+
+                var altesteStudent = CSharpAnfaenger.Teilnehmer.Max(student => student.alter);
+                foreach (var student in CSharpAnfaenger.Teilnehmer.Where(student => student.alter == altesteStudent))
+                {
+                    Console.WriteLine($"Älteste Student ist : {student.name}, {altesteStudent} Jahre");
+                }
+               
+            }
+            break;
+
+        case MenuOptionen.Beenden:
+            Console.WriteLine("Tschüss");
+            return;
+
+        case MenuOptionen.StatusAndern:
+            Console.WriteLine("Status ändern:");
+            Console.WriteLine("1. Anmelden möglich");  
+            Console.WriteLine("2. Aktiv");
+            Console.WriteLine("3. Abgeschlossen");
+            string statusOption = Console.ReadLine();
+            switch (statusOption)
+            {
+                case "1":
+                    CSharpAnfaenger.Status = KursStatus.Anmelden_möglich;
+                    Console.WriteLine($"Der Status des Kurses {CSharpAnfaenger.titel} wurde auf 'Anmelden möglich' geändert.");
+                    break;
+                case "2":
+                    CSharpAnfaenger.Status = KursStatus.Aktiv;
+                    Console.WriteLine($"Der Status des Kurses {CSharpAnfaenger.titel} wurde auf 'Aktiv' geändert.");
+                    break;
+                case "3":
+                    CSharpAnfaenger.Status = KursStatus.Abgeschlossen;
+                    Console.WriteLine($"Der Status des Kurses {CSharpAnfaenger.titel} wurde auf 'Abgeschlossen' geändert.");
+                    break;
+                default:
+                    Console.WriteLine("Ungültige Eingabe. Status wurde nicht geändert.");
+                    break;
+            }
+
+            break;
+
+        case MenuOptionen.StatusAnzeigen:
+        Console.WriteLine("Status anzeigen:");
+        Console.WriteLine($"Der Kurs {CSharpAnfaenger.titel} hat den Status: {CSharpAnfaenger.Status}");
+        break;
 
 
+        default:
+            Console.WriteLine("Falsche eingabe");
+            break;
+    }
+}
+*/
+
+
+//Note Berechnung mit switch expression
+Console.WriteLine("Wie viel Punkte hast du bekommen?");
+int punktezahl= Convert.ToInt32(Console.ReadLine());
+string noteBewertung=punktezahl switch
+{
+    >=90 => "Note 1",
+    >=80 => "Note 2",
+    >=70 => "Note 3",
+    >=60 => "Note 4",
+    _ => "Note 5"
+};
+Console.WriteLine(noteBewertung);
+
+if (punktezahl >= 60)
+{
+    Console.WriteLine("Bestanden. Herzlicg Glückwunsch!");
+}
+else
+{
+    Console.WriteLine("Nicht bestanden, tut mir leid.");
+}
+
+
+List<Bewertung> bewertungen = new List<Bewertung>();
+
+bewertungen.Add(new Bewertung("Anna", 85));
+bewertungen.Add(new Bewertung("Max", 45));
+bewertungen.Add(new Bewertung("Tom", 72));
+
+foreach (var bewertung in bewertungen)
+{
+    string note = bewertung.Punkte switch
+    {
+        >= 90 => "Note 1",
+        >= 80 => "Note 2",
+        >= 70 => "Note 3",
+        >= 60 => "Note 4",
+        _ => "Note 5"
+    };
+    Console.WriteLine($"Student: {bewertung.StudentName}, Punkte: {bewertung.Punkte}, {note}");
+}
+//Statistik Bewertungen
+
+int anzahlBewertungen = bewertungen.Count;
+int anzahlBestandenStudentetn= bewertungen.Count(b => b.Punkte >= 60);
+int anzahlNichtBestandenStudentetn= bewertungen.Count(b => b.Punkte < 60);
+double durchschnitt = bewertungen.Average(b => b.Punkte);
+double max = bewertungen.Max(b => b.Punkte);
+double min = bewertungen.Min(b => b.Punkte);
+
+
+Console.WriteLine($"Anzahl der Studenten: {anzahlBewertungen}");
+Console.WriteLine($"Anzahl der Studenten die bestanden haben: {anzahlBestandenStudentetn}");
+Console.WriteLine($"Anzahl der Studenten die nicht bestanden haben: {anzahlNichtBestandenStudentetn}");
+Console.WriteLine("Durchschnitt: " + durchschnitt);
+Console.WriteLine("Beste Punktzahl: " + max);
+Console.WriteLine("Schlechteste Punktzahl: " + min);
